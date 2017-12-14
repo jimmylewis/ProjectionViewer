@@ -11,7 +11,7 @@ namespace ProjectionViewer
     [Name(ProjectionViewerMargin.MarginName)]
     [Order(After = PredefinedMarginNames.HorizontalScrollBar)]  // Ensure that the margin occurs below the horizontal scrollbar
     [MarginContainer(PredefinedMarginNames.Bottom)]             // Set the container to the bottom of the editor window
-    [ContentType("projection")]                                 // Show this margin for all projection-based types
+    [ContentType("text")]                                 // Show this margin for all projection-based types
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     internal sealed class ProjectionViewerMarginFactory : IWpfTextViewMarginProvider
     {
@@ -27,7 +27,14 @@ namespace ProjectionViewer
         /// </returns>
         public IWpfTextViewMargin CreateMargin(IWpfTextViewHost wpfTextViewHost, IWpfTextViewMargin marginContainer)
         {
-            return new ProjectionViewerMargin(wpfTextViewHost.TextView);
+            // only show this for projection-based views.
+            // TODO: Figure out why setting content type above to "projection" didn't seeem to work
+            if(wpfTextViewHost.TextView.TextBuffer.ContentType.IsOfType("projection"))
+            {
+                return new ProjectionViewerMargin(wpfTextViewHost.TextView);
+            }
+
+            return null;
         }
 
         #endregion

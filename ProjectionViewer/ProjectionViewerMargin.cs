@@ -50,7 +50,7 @@ namespace ProjectionViewer
             _label = new Label
             {
                 Background = new SolidColorBrush(Colors.LightGreen),
-                Content = $"This text view contains {_projectionBuffer.SourceBuffers.Count} projection buffers.",
+                Content = $"This text view contains {_projectionBuffer.SourceBuffers.Count} projection buffers and {_projectionBuffer.CurrentSnapshot.SpanCount} projection spans.",
             };
 
             this.Children.Add(_label);
@@ -60,7 +60,7 @@ namespace ProjectionViewer
 
         private void OnSourceBuffersChanged(object sender, ProjectionSourceBuffersChangedEventArgs e)
         {
-            _label.Content = $"This text view contains {_projectionBuffer.SourceBuffers.Count} projection buffers.";
+            _label.Content = $"This text view contains {_projectionBuffer.SourceBuffers.Count} projection buffers and {_projectionBuffer.CurrentSnapshot.SpanCount} projection spans.";
         }
 
         #region IWpfTextViewMargin
