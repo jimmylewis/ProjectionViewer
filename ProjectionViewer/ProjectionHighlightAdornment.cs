@@ -124,7 +124,10 @@ namespace ProjectionViewer
 
                             int colorIndex = GetColorIndex(allSourceSpans[j]);
                             Image image = GetAdornmentImage(viewSnapshotSpan, _brushes[colorIndex], _pens[colorIndex]);
-                            _layer.AddAdornment(AdornmentPositioningBehavior.TextRelative, viewSnapshotSpan, null, image, null);
+                            if (image != null)
+                            {
+                                _layer.AddAdornment(AdornmentPositioningBehavior.TextRelative, viewSnapshotSpan, null, image, null);
+                            }
 
                             allSpansIndex++;
                             break;
