@@ -111,11 +111,17 @@ namespace ProjectionViewer
             int allSpansIndex = 0;
             for(int i = 0; i < sourceSpans.Count; i++)
             {
+                if(sourceSpans[i].Length == 0)
+                {
+                    continue;
+                }
+
                 for(int j = allSpansIndex; j < allSourceSpans.Count; j++)
                 {
                     if(allSourceSpans[j].Snapshot == sourceSpans[i].Snapshot)
                     {
-                        if(allSourceSpans[j].IntersectsWith(sourceSpans[i]))
+                        if(allSourceSpans[j].IntersectsWith(sourceSpans[i]) 
+                            && allSourceSpans[j].End > sourceSpans[i].Start)
                         {
                             var viewSpan = _projectionBuffer.CurrentSnapshot.MapFromSourceSnapshot(allSourceSpans[j]).Single();
                             var viewSnapshotSpan = new SnapshotSpan(_projectionBuffer.CurrentSnapshot, viewSpan);
@@ -129,7 +135,7 @@ namespace ProjectionViewer
                                 _layer.AddAdornment(AdornmentPositioningBehavior.TextRelative, viewSnapshotSpan, null, image, null);
                             }
 
-                            allSpansIndex++;
+                            allSpansIndex = j + 1;
                             break;
                         }
                     }
