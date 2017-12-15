@@ -50,6 +50,8 @@
     <Compile Include="ProjectionViewerMargin.cs" />
     <Compile Include="ProjectionViewerMarginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectionHighlightAdornment.cs" />
+    <Compile Include="ProjectionAdornmentTextViewCreationListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
